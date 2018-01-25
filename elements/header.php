@@ -11,31 +11,15 @@
 	<div class="search-dropdown dropdown pull-right visible-xs">
 		<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="fa fa-search"></i></button>
 		<div class="dropdown-menu">
-			<form >
-				<input class="form-control" placeholder="Buscar" type="text">
+			<form role="search" method="get" action="<?php echo home_url( '/' ); ?>">
+				<input class="form-control" placeholder="Buscar" name="s" type="search" value="<?php echo get_search_query() ?>" />
 			</form>
 		</div>
 	</div>
 
 	<div class="navbar-collapse nav-responsive-disabled">
-
-		<!--toggle buttons start-->
-		<ul class="nav navbar-nav">
-			<li>
-				<a class="toggle-btn" data-toggle="ui-nav" href="">
-					<i class="fa fa-bars"></i>
-				</a>
-			</li>
-		</ul>
-		<!-- toggle buttons end -->
-
-		<form class="search-content hidden-xs" >
-			<button type="submit" name="search" class="btn srch-btn">
-				<i class="fa fa-search"></i>
-			</button>
-			<input type="text" class="form-control" name="keyword" placeholder="Buscar">
-		</form>
-
+		<form class="navbar-form pull-right search-form-menu" role="search" method="get" action="<?php echo home_url( '/' ); ?>">						
+			<input id="search-field" type="search" class="form-control" placeholder="Busca" value="<?php echo get_search_query() ?>" name="s" />
+		</form>		
 	</div>
-
 </header>
