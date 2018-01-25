@@ -45,17 +45,19 @@ add_action( 'login_enqueue_scripts', 'admin_custom_logo' );
 
 /*
 **
-Hide Admin Menu Itens
+Hide Admin Menu Itens If User Is Not Admin
 **
 */
 
-function my_admin_menu() {
+if (!current_user_can('administrator') ) :
+	function my_admin_menu() {
 
-    remove_menu_page('edit.php');
-    remove_menu_page('upload.php');
-    remove_menu_page('edit-comments.php');
-    remove_menu_page('themes.php');
+	    remove_menu_page('edit.php');
+	    remove_menu_page('upload.php');
+	    remove_menu_page('edit-comments.php');
+	    remove_menu_page('themes.php');
 
-}
+	}
 
-add_action('admin_menu', 'my_admin_menu');
+	add_action('admin_menu', 'my_admin_menu');
+endif;

@@ -32,10 +32,10 @@
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#tab1"data-toggle="tab">Visão Geral</a></li>
 						<li><a href="#tab2" data-toggle="tab">Valores e regras</a></li>
-						<li class=""><a href="#tab3"data-toggle="tab">Links Úteis</a></li>
+						<li class=""><a href="#tab3"data-toggle="tab">Disparos</a></li>
 					</ul>
 					<div class="tab-content panel wrapper">
-						<div id="tab1" class="tab-pane fade active in">
+						<div id="tab1" class="tab-pane fade">
 							<div class="row">
 								<div class="col-md-6">
 									<form class="form-horizontal">
@@ -245,119 +245,22 @@
 								</div>
 							</div>
 						</div>
-						<div id="tab3" class="tab-pane fade">
+						<div id="tab3" class="tab-pane fade active in">
 							<div class="row">
-								<div class="col-md-6">
-									<h2>Customer information</h2>
-									<hr/>
-									<form class="form-horizontal">
-										<div class="form-group">
-											<div class="col-sm-4">Customer Name:
-											</div>
-											<div class="col-sm-8">
-												<strong>John Doe</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-4">Address:
-											</div>
-											<div class="col-sm-8">
-												<strong>Australia, Melborne</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-4">City:
-											</div>
-											<div class="col-sm-8">
-												<strong> Melborne</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-4">Country:
-											</div>
-											<div class="col-sm-8">
-												<strong>Australia</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-4">Phone Number:
-											</div>
-											<div class="col-sm-8">
-												<strong>012345678</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-4">Email:
-											</div>
-											<div class="col-sm-8">
-												<strong>test@test.com</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-4">Previous Order:
-											</div>
-											<div class="col-sm-8">
-												<strong>Nill</strong>
-											</div>
-										</div>
-									</form>
-								</div>
-								<div class="col-md-6">
-									<h2>Billing information</h2>
-									<hr/>
-									<form class="form-horizontal">
-										<div class="form-group">
-											<div class="col-sm-4">
-												Payment Method:
-											</div>
-											<div class="col-sm-8">
-												<strong>Credit Card</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-4">
-												Billing method:
-											</div>
-											<div class="col-sm-8">
-												<strong>Plane</strong>
-											</div>
-										</div>
-										<div class="form-group">
-											<div class="col-sm-4">
-												Billing Address:
-											</div>
-											<div class="col-sm-8">
-												<strong>123 Australia, Melborne</strong>
-											</div>
-										</div>
+								<?php 
+									$disparos = get_field('disparos');
 
-										<div class="form-group">
-											<div class="col-sm-4">
-												Items:
-											</div>
-											<div class="col-sm-8 ">
-												<strong> 3 Item </strong>
-											</div>
+									foreach ($disparos as $disparo): 
+								?>									
+									<div class="form-group">
+										<div class="col-sm-4">
+											<strong>Título:</strong>
 										</div>
-										<div class="form-group">
-											<div class="col-sm-4">
-												Client:
-											</div>
-											<div class="col-sm-8">
-												<strong>2 past orders </strong>
-											</div>
+										<div class="col-sm-8">
+											<a href="<?php echo get_the_permalink($disparo['ID']); ?>"><?php echo $disparo['title']; ?></a>
 										</div>
-										<div class="form-group">
-											<div class="col-sm-4">
-												Other info:
-											</div>
-											<div class="col-sm-8">
-												<strong>some other information goes here</strong>
-											</div>
-										</div>
-
-									</form>
-								</div>
+									</div>
+								<?php endforeach ?>
 							</div>
 						</div>
 					</div>
