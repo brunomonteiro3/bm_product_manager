@@ -28,12 +28,13 @@
 		</li>
 		
 		<li>
-			<a href=""><i class="fa fa-home"></i><span>Ofertas</span><i class="fa fa-angle-right pull-right"></i></a>
+			<a href=""><i class="fa fa-home"></i><span>Promos</span><i class="fa fa-angle-right pull-right"></i></a>
 			<ul class="nav nav-sub">
 				<?php 
 					$args = array (
 						'post_type'	=> array( 'cpt_promo' ),
-						'posts_per_page' => 20
+						'posts_per_page' => 20,
+						'post_status'			=> array('publish', 'future')
 					);
 
 					$promo = new WP_Query( $args );

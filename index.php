@@ -95,14 +95,16 @@
 						<thead>
 							<tr>
 								<th>Código</th>
+								<th>Data</th>
 								<th>Título</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php 
 								$args = array (
-									'post_type'	=> array( 'cpt_promo' ),
-									'posts_per_page' => 20
+									'post_type'			=> array( 'cpt_promo' ),
+									'posts_per_page' 	=> 20,
+									'post_status'			=> array('publish', 'future')
 								);
 
 								$produto = new WP_Query( $args );
@@ -113,11 +115,14 @@
 							?>
 							<tr>
 								<td><a href="<?php the_permalink(); ?>"><?php the_field('codigo_promo'); ?></a></td>
+								<td><a href="<?php the_permalink(); ?>"><?php the_date('d\/m\/Y'); ?></a></td>
 								<td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>
 							</tr>
 							<?php 
 									endwhile;
 								endif;
+
+								wp_reset_query();
 							?>
 						</tbody>
 					</table>
@@ -132,8 +137,32 @@
 				Disparos
 			</header>
 
-			<div class="panel-body">		
-				Breve
+			<div class="panel-body">						
+				<table class="table table-striped latest-order">
+					<thead>
+						<th>
+							<strong>Título</strong>
+						</th>
+						<th>
+							<strong>Data do disparo</strong>
+						</th>
+						<th>
+							&nbsp;
+						</th>
+					</thead>
+				<?php 
+				/*
+					$disparos = get_field('disparos');
+
+					foreach ($disparos as $disparo): 
+				?>							
+					<tr>
+						<td><?php echo $disparo['title']; ?></td>
+						<td><?php the_field('data_disparo', $disparo['ID']); ?></td>
+						<td><a href="<?php echo get_the_permalink($disparo['ID']); ?>">Visualizar</a></td>
+					</tr>
+				<?php endforeach */ ?>
+				</table>
 			</div>
 		</div>
 	</div>
