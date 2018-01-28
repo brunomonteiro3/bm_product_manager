@@ -27,14 +27,40 @@
 			</header>
 
 			<div class="panel-body">
-				<p>
-					Este disparo foi feito em: <strong><?php echo get_field('data', $post->ID); ?></strong> e é referente a promo <strong><a href="<?php echo get_the_permalink($post->post_parent); ?>"><?php echo get_the_title($post->post_parent); ?></a></strong>.
-				</p> 
+				<div class="col-md-6">
+					<div class="form-horizontal">
+						<div class="form-group">
+							<div class="col-sm-4">
+								<strong>Data do disparo:</strong>
+							</div>
 
-				<div class="col-md-12 text-center">
-					<iframe src="<?php echo $post->guid; ?>" frameborder="0" width="600" height="1000"></iframe>
+							<div class="col-sm-8">
+								<?php the_field('data_disparo'); ?>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-sm-4">
+								<strong>Promo:</strong>
+							</div>
+
+							<div class="col-sm-8">
+								<a href="<?php echo get_the_permalink($post->post_parent); ?>"><?php echo get_the_title($post->post_parent); ?></a>
+							</div>
+						</div>
+					</div>
+
+					<div style="clear: both"></div>
+
+					<?php edit_post_link('<i class="fa fa-pencil" aria-hidden="true"></i> Editar disparo');?>	
 				</div>
-			</div>
+
+				<div class="col-md-6">
+					<div class="col-md-12 text-center">
+						<iframe src="<?php echo $post->guid; ?>" frameborder="0" width="600" height="1000"></iframe>
+					</div>
+				</div>
+			</div>			
 		</div>
 	</div>
 </div>
