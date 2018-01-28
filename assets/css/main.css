@@ -80,7 +80,7 @@ Layout
 }
 
 body{
-  background: #f5f5f5;
+  background: #f8f8f8;
 }
 
 .panel{
@@ -636,7 +636,7 @@ body {
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
   color: #626262;
-  background-color: #eaeef3;
+  background-color: #f8f8f8;  
   -webkit-font-smoothing: antialiased;
   line-height: 1.5;
   letter-spacing: 0;
@@ -969,16 +969,16 @@ a {
 
 .btn-primary {
   color: #ffffff;
-  background-color: #62549a;
-  border-color: #62549a; }
+  background-color: #b81334;
+  border-color: #b81334; }
   .btn-primary:focus, .btn-primary.focus, .btn-primary:active, .btn-primary.active {
     color: #ffffff !important;
-    background-color: #4d4279 !important;
-    border-color: #493e72 !important; }
+    background-color: #8a0e27 !important;
+    border-color: #8a0e27 !important; }
   .btn-primary:hover {
     color: #ffffff;
-    background-color: #584b8a;
-    border-color: #554986; }
+    background-color: #8a0e27;
+    border-color: #8a0e27; }
 
 .btn-info {
   color: #ffffff;
@@ -3220,7 +3220,7 @@ ul.ColVis_collection li:hover {
   background: #f3f3f3 !important; }
 
 .latest-order a {
-  color: #4aa9e9; }
+  color: #b81334; }
 
 /*--------------------------------------------
 nestables
