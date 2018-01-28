@@ -4,11 +4,13 @@
 
 		$produtos = get_the_terms(get_the_ID(), 'taxonomy_produto');
 
-		foreach ($produtos as $produto) :
-			if ( $produto_data = get_page_by_path( $produto->slug, OBJECT, 'cpt_produto' ) ) :
-				$produto_data_ID = $produto_data->ID;
-			endif;
-		endforeach;			
+		if ($produtos) :
+			foreach ($produtos as $produto) :
+				if ( $produto_data = get_page_by_path( $produto->slug, OBJECT, 'cpt_produto' ) ) :
+					$produto_data_ID = $produto_data->ID;
+				endif;
+			endforeach;		
+		endif;	
 ?>
 
 <div class="row">
@@ -35,7 +37,7 @@
 						<li class=""><a href="#tab3"data-toggle="tab">Disparos</a></li>
 					</ul>
 					<div class="tab-content panel wrapper">
-						<div id="tab1" class="tab-pane fade">
+						<div id="tab1" class="tab-pane fade active in">
 							<div class="row">
 								<div class="col-md-6">
 									<form class="form-horizontal">
@@ -64,12 +66,16 @@
 												<strong>Responsável:</strong>
 											</div>
 											<div class="col-sm-8">												
-												<?php													
-													$responsaveis = get_the_terms( $produto_data_ID, 'taxonomy_analista' );
+												<?php									
+													if ($produtos) :	
+														$responsaveis = get_the_terms( $produto_data_ID, 'taxonomy_analista' );
 
-													foreach ($responsaveis as $responsavel) :
-														echo $responsavel->name . ', ';
-													endforeach;
+														foreach ($responsaveis as $responsavel) :
+															echo $responsavel->name . ', ';
+														endforeach;
+													else :
+														edit_post_link('<span class="label label-danger">Associe um produto à esta promo. <i class="fa fa-pencil" aria-hidden="true"></i></span>');
+													endif;
 												?>
 											</div>
 										</div>
@@ -77,12 +83,17 @@
 											<div class="col-sm-4"><i class="fa fa-pencil" aria-hidden="true"></i> <strong>Copywriter responsável:</strong>
 											</div>
 											<div class="col-sm-8">											
-												<?php													
+												<?php				 
 													$copywriters = get_the_terms( get_the_ID(), 'taxonomy_copywriter' );
 
-													foreach ($copywriters as $copywriter) :
-														echo $copywriter->name;
-													endforeach;
+													if ($copywriters):
+														foreach ($copywriters as $copywriter) :
+															echo $copywriter->name;
+														endforeach;
+													else :
+														edit_post_link('<span class="label label-danger">Associe um copywriter. <i class="fa fa-pencil" aria-hidden="true"></i></span>');
+													endif;
+
 												?>
 											</div>
 										</div>
@@ -245,22 +256,60 @@
 								</div>
 							</div>
 						</div>
-						<div id="tab3" class="tab-pane fade active in">
-							<div class="row">
-								<?php 
-									$disparos = get_field('disparos');
+						<div id="tab3" class="tab-pane fade">
+							<div class="row">									
+								<div class="col-md-12">
+									<table class="table table-striped latest-order">
+										<thead>
+											<th>
+												<strong>Título</strong>
+											</th>
+											<th>
+												<strong>Data do disparo</strong>
+											</th>
+											<th>
+												&nbsp;
+											</th>
+										</thead>
+									<?php 
+										/*
+										$array = [
+										    ['data' => '20/10/2018'],
+										    ['data' => '20/10/2012'],
+										    ['data' => '01/10/2018'],
+										    ['data' => '06/10/2015'],
+										    ['data' => '01/01/1997'],
+										    ['data' => '11/09/2001'],
+										    ['data' => '11/01/1985'],
+										];
 
-									foreach ($disparos as $disparo): 
-								?>									
-									<div class="form-group">
-										<div class="col-sm-4">
-											<strong>Título:</strong>
-										</div>
-										<div class="col-sm-8">
-											<a href="<?php echo get_the_permalink($disparo['ID']); ?>"><?php echo $disparo['title']; ?></a>
-										</div>
-									</div>
-								<?php endforeach ?>
+										usort($array, function($a, $b){
+										    // Convertendo as datas de dd/mm/YYYY para YYYY-mm-dd
+										    $r1 = explode('/', $a['data']);
+										    $d1 = implode('-', $r1);
+										    $r2 = explode('/', $b['data']);
+										    $d2 = implode('-', $r2);
+										    
+										    $t1 = strtotime($d1);
+										    $t2 = strtotime($d2);
+										    return $t1 - $t2;
+										});
+
+										var_dump($array);
+										*/
+
+										$disparos = get_field('disparos');
+
+										foreach ($disparos as $disparo): 
+									?>							
+										<tr>
+											<td><?php echo $disparo['title']; ?></td>
+											<td><?php the_field('data_disparo', $disparo['ID']); ?></td>
+											<td><a href="<?php echo get_the_permalink($disparo['ID']); ?>">Visualizar</a></td>
+										</tr>
+									<?php endforeach ?>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -270,7 +319,9 @@
 					<div class="well well-sm mbot-0">
 						<small>
 							A última atualização desta promo foi em  <?php the_modified_date('d\/m\/Y – g:i a'); ?>, por <?php the_modified_author(); ?>. <br />
-							Criado por: <?php the_author_meta('display_name'); ?> (<?php the_author_meta('user_email'); ?>).
+							Criado por: <?php the_author_meta('display_name'); ?> (<?php the_author_meta('user_email'); ?>). <br />
+							<br />
+							<?php edit_post_link('<i class="fa fa-pencil" aria-hidden="true"></i> Editar promo');?>	
 						</small>
 					</div>
 				</div>
