@@ -19,21 +19,14 @@
 				Produtos
 			</header>
 
-			<div class="panel-body">		
-				<div class="order-short-info">
-					<span class="mtop-10"> Produtos cadastrados: <strong><?php echo $published_posts; ?> </strong></span>
-					<a href="#" class="pull-right pull-left-xs btn btn-primary btn-sm">Ver todos</a>
-				</div>
-
-				<hr />
-
+			<div class="panel-body">	
 				<div class="table-responsive">
 					<table class="table table-hover latest-order">
 						<thead>
 							<tr>
-								<th>ID</th>
+								<th>&nbsp;</th>
+								<th class="text-center">ID</th>
 								<th>Nome do Produto</th>
-								<th>Promos</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -48,29 +41,26 @@
 								if ( $produto->have_posts() ) :
 									while ( $produto->have_posts() ) :
 										$produto->the_post();
-
-
+										$logo = wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' );
 							?>
 							<tr>
-								<td><a href="<?php the_permalink(); ?>"><?php the_field('product_id'); ?></a></td>
+								<td align="center"><a href="<?php the_permalink(); ?>"><img src="<?php echo $logo[0]; ?>" width="50" /></a></td>
+								<td align="center"><a href="<?php the_permalink(); ?>"><?php the_field('product_id'); ?></a></td>
 								<td><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></td>
-								<td>
-									<a href="<?php the_permalink(); ?>">															
-										<?php 
-											$productData = get_term_by( 'slug', $post->post_name, 'taxonomy_produto'); 
-											if ($productData) :
-												echo $productData->count;
-											endif;	
-										?>
-									</a>
-								</td>
 							</tr>
 							<?php 
 									endwhile;
 								endif;
 							?>
 						</tbody>
-					</table>
+					</table>	
+
+					<hr />
+
+					<div class="order-short-info">
+						<span class="mtop-10"> Produtos cadastrados: <strong><?php echo $published_posts; ?> </strong></span>
+						<a href="#" class="pull-right pull-left-xs btn btn-primary btn-sm">Ver todos</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -82,14 +72,7 @@
 				Promos recentes
 			</header>
 
-			<div class="panel-body">		
-				<div class="order-short-info">
-					<span class="mtop-10"> Promos cadastradas: <strong>123</strong></span>
-					<a href="#" class="pull-right pull-left-xs btn btn-primary btn-sm">Ver todas</a>
-				</div>
-
-				<hr />
-
+			<div class="panel-body">	
 				<div class="table-responsive">
 					<table class="table table-hover latest-order">
 						<thead>
@@ -126,6 +109,12 @@
 							?>
 						</tbody>
 					</table>
+
+					<hr /> 
+
+					<div class="order-short-info">
+						<a href="#" class="pull-right pull-left-xs btn btn-primary btn-sm">Ver todas</a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -150,18 +139,25 @@
 							&nbsp;
 						</th>
 					</thead>
-				<?php 
-				/*
-					$disparos = get_field('disparos');
+					<?php 
+						$attachments = get_posts( array(
+							'post_type' => 'attachment',
+							'posts_per_page' => 10,
+							'post_mime_type'	=> 'text/html'
+						) );
 
-					foreach ($disparos as $disparo): 
-				?>							
+						if ( $attachments ) :
+							foreach ( $attachments as $attachment ) :
+					?>
 					<tr>
-						<td><?php echo $disparo['title']; ?></td>
-						<td><?php the_field('data_disparo', $disparo['ID']); ?></td>
-						<td><a href="<?php echo get_the_permalink($disparo['ID']); ?>">Visualizar</a></td>
+						<td><?php echo $attachment->post_title; ?></td>
+						<td><?php the_field('data_disparo', $attachment->ID); ?></td>
+						<td><a href="<?php echo get_permalink($attachment->ID); ?>">Visualizar</a></td>
 					</tr>
-				<?php endforeach */ ?>
+					<?php 
+							endforeach;
+						endif;
+					?>
 				</table>
 			</div>
 		</div>

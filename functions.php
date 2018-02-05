@@ -17,4 +17,5 @@
 	require_once locate_template('core/taxonomies/taxonomy-analista.php');
 	require_once locate_template('core/taxonomies/taxonomy-copywriter.php');
 	require_once locate_template('core/taxonomies/taxonomy-produto.php');
+	require_once locate_template('core/taxonomies/taxonomy-promo.php');
 ?>

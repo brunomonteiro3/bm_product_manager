@@ -24,7 +24,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-12">
+	<div class="col-md-8">
 		<div class="panel">
 			<header class="panel-heading panel-border">
 				Título: <?php the_title(); ?>
@@ -327,6 +327,56 @@
 				</div>
 			</div>
 		</div>	
+	</div>
+
+	<div class="col-md-4">
+		<div class="panel">
+			<header class="panel-heading panel-border">
+				<i class="fa fa-calendar"></i> Calendário
+			</header>
+			<div class="panel-body">
+				<table class="table table-striped latest-order">
+					<thead>
+						<th>
+							<strong>Data</strong>
+						</th>
+						<th>
+							<strong>Descrição</strong>
+						</th>
+					</thead>
+
+					<?php 
+						$args = array (
+							'post_type'			=> array( 'cpt_calendar' ),
+							'posts_per_page' 	=> 20,
+							'post_status'			=> array('publish', 'future')
+						);
+
+						$produto = new WP_Query( $args );
+
+						if ( $produto->have_posts() ) :
+							while ( $produto->have_posts() ) :
+								$produto->the_post();
+					?>
+						<tr>
+							<td>
+								<a href="<?php the_permalink(); ?>">
+									<?php the_date('d\/m\/Y'); ?>
+								</a>
+							</td>
+							<td>
+								<a href="<?php the_permalink(); ?>">
+									<?php the_title(); ?>
+								</a>
+							</td>
+						</tr>
+					<?php 
+							endwhile;
+						endif;
+					?>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 

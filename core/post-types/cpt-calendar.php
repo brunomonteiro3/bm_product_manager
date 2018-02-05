@@ -9,7 +9,8 @@
 			'label'                 => 'Calendário',
 			'labels'                => $labels,
 			'supports'              => array(
-											'title'),
+											'title',
+											'editor'),
 			'taxonomies'            => array(),
 			'hierarchical'          => false,
 			'public'                => true,
