@@ -51,11 +51,11 @@ Hide Admin Menu Itens If User Is Not Admin
 
 if (!current_user_can('administrator') ) :
 	function my_admin_menu() {
-
-	    remove_menu_page('edit.php');
-	    remove_menu_page('upload.php');
-	    remove_menu_page('edit-comments.php');
-	    remove_menu_page('themes.php');
+		remove_menu_page('edit.php?post_type=page');
+		remove_menu_page('edit.php');
+		remove_menu_page('upload.php');
+		remove_menu_page('edit-comments.php');
+		remove_menu_page('themes.php');
 
 	}
 
