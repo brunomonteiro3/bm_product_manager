@@ -11,6 +11,7 @@
 	/* Post Types */
 	require_once locate_template('core/post-types/cpt-produto.php');
 	require_once locate_template('core/post-types/cpt-promo.php');
+	require_once locate_template('core/post-types/cpt-calendar.php');
 
 	/* Taxonomies */
 	require_once locate_template('core/taxonomies/taxonomy-analista.php');
